@@ -1,27 +1,5 @@
 #!/bin/bash
 
-RUBYGEMS_VERSION=1.7.2
+sudo rpm -Uvh http://download.fedora.redhat.com/pub/epel/5/i386/epel-release-5-4.noarch.rpm
 
-INITIAL_DIR=`pwd`
-cd `dirname $0`
-CHEF_REPO_ROOT=`pwd`
-cd $INITIAL_DIR
-
-echo "Updating apt package index..."
-sudo yum -y update
-
-echo "Installing chef's required apt packages..."
-sudo yum -y install ruby ruby-dev libopenssl-ruby rdoc ri irb build-essential wget ssl-cert
-
-echo "Installing rubygems $RUBYGEMS_VERSION from source..."
-cd /tmp
-curl http://production.cf.rubygems.org/rubygems/rubygems-$RUBYGEMS_VERSION.tgz -O
-tar zxf rubygems-$RUBYGEMS_VERSION.tgz
-cd rubygems-$RUBYGEMS_VERSION
-sudo ruby setup.rb --no-format-executable
-
-echo "Installing chef..."
-sudo gem install chef --no-rdoc --no-ri
-
-echo "Setting up chef-solo..."
-sudo env SSL_CRT=$SSL_CRT SSL_KEY=$SSL_KEY FQDN=$FQDN ruby $CHEF_REPO_ROOT/setup/setup-chef-solo-config.rb
+sudo yum install ruby-1.8.7.334-2.el5 ruby-devel-1.8.7.334-2.el5 ruby-ri-1.8.7.334-2.el5 ruby-rdoc-1.8.7.334-2.el5 git gcc gcc-c++ automake autoconf make
