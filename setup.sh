@@ -8,10 +8,10 @@ CHEF_REPO_ROOT=`pwd`
 cd $INITIAL_DIR
 
 echo "Updating apt package index..."
-sudo yum --yes update
+sudo yum -y update
 
 echo "Installing chef's required apt packages..."
-sudo yum --yes install ruby ruby-dev libopenssl-ruby rdoc ri irb build-essential wget ssl-cert
+sudo yum -y install ruby ruby-dev libopenssl-ruby rdoc ri irb build-essential wget ssl-cert
 
 echo "Installing rubygems $RUBYGEMS_VERSION from source..."
 cd /tmp
