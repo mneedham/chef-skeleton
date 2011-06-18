@@ -15,7 +15,7 @@ sudo yum -y install ruby ruby-dev libopenssl-ruby rdoc ri irb build-essential wg
 
 echo "Installing rubygems $RUBYGEMS_VERSION from source..."
 cd /tmp
-wget http://production.cf.rubygems.org/rubygems/rubygems-$RUBYGEMS_VERSION.tgz
+curl http://production.cf.rubygems.org/rubygems/rubygems-$RUBYGEMS_VERSION.tgz -O
 tar zxf rubygems-$RUBYGEMS_VERSION.tgz
 cd rubygems-$RUBYGEMS_VERSION
 sudo ruby setup.rb --no-format-executable
