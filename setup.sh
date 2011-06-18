@@ -18,3 +18,5 @@ rm /usr/local/src/ruby-1.9.2-p180.tar.gz
 rm -rf /usr/local/src/ruby-1.9.2-p180
 
 gem install chef --no-rdoc --no-ri
+
+ln -s /usr/local/bin/chef-solo /usr/bin/chef-solo
