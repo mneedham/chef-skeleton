@@ -1,0 +1,3 @@
+To get chef setup on a Fedora box you can run the following command:
+
+sudo bash < <(curl -s -L https://raw.github.com/mneedham/chef-skeleton/master/setup.sh)
