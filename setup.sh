@@ -1,27 +1,22 @@
 #!/bin/bash
 
-RUBYGEMS_VERSION=1.7.2
+yum install -y gcc openssl-devel zlib-devel.x86_64
+yum groupinstall -y development-tools development-libs
 
-INITIAL_DIR=`pwd`
-cd `dirname $0`
-CHEF_REPO_ROOT=`pwd`
-cd $INITIAL_DIR
+cd /usr/local/src/
+curl -O ftp://ftp.ruby-lang.org//pub/ruby/1.9/ruby-1.9.2-p180.tar.gz
+tar xvzf ruby-1.9.2-p180.tar.gz
+cd ruby-1.9.2-p180
+./configure
+make && make install
+ln -s /usr/local/bin/ruby /usr/bin/ruby # Create a sym link for the same path  
+ln -s /usr/local/bin/gem /usr/bin/gem # Create a sym link for the same path 
 
-echo "Updating apt package index..."
-sudo yum --yes update
+cd -
 
-echo "Installing chef's required apt packages..."
-sudo yum --yes install ruby ruby-dev libopenssl-ruby rdoc ri irb build-essential wget ssl-cert
+rm /usr/local/src/ruby-1.9.2-p180.tar.gz
+rm -rf /usr/local/src/ruby-1.9.2-p180
 
-echo "Installing rubygems $RUBYGEMS_VERSION from source..."
-cd /tmp
-wget http://production.cf.rubygems.org/rubygems/rubygems-$RUBYGEMS_VERSION.tgz
-tar zxf rubygems-$RUBYGEMS_VERSION.tgz
-cd rubygems-$RUBYGEMS_VERSION
-sudo ruby setup.rb --no-format-executable
+gem install chef --no-rdoc --no-ri
 
-echo "Installing chef..."
-sudo gem install chef --no-rdoc --no-ri
-
-echo "Setting up chef-solo..."
-sudo env SSL_CRT=$SSL_CRT SSL_KEY=$SSL_KEY FQDN=$FQDN ruby $CHEF_REPO_ROOT/setup/setup-chef-solo-config.rb
+ln -s /usr/local/bin/chef-solo /usr/bin/chef-solo
