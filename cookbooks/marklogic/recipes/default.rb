@@ -28,3 +28,10 @@ execute "/etc/init.d/MarkLogic start" do
   action :run
   creates "/var/run/MarkLogic.pid"
 end
+
+cookbook_file "/opt/MarkLogic/Admin/booster.xqy" do 
+  source "booster-0.2b.xqy"
+  mode "0755"
+  owner "root"
+  group "root"
+end
