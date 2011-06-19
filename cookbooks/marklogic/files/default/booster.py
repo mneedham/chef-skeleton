@@ -15,7 +15,7 @@ def booster(server_name, args = ""):
     http(server_name, "booster.xqy", args)
 
 def license(server_name):
-    http(server_name, "licence-go.xqy", { 'license-key':"1F6B-7ED3-EE57-F576-C1A8-E6B7-CD35-FDAF-2E71-EF5C-3CA3", 'licensee':"Springer - Michael Hughes - Evaluation" })
+    http(server_name, "license-go.xqy", { 'license-key':"1F6B-7ED3-EE57-F576-C1A8-E6B7-CD35-FDAF-2E71-EF5C-3CA3", 'licensee':"Springer - Michael Hughes - Evaluation" })
 
 def initialize_go(server_name):
     http(server_name, "initialize-go.xqy")
