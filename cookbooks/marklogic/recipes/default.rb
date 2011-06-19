@@ -24,3 +24,9 @@ package "MarkLogic" do
   provider Chef::Provider::Package::Rpm
 end
 
+cookbook_file "/opt/MarkLogic/Admin/booster.xqy" do 
+  source "booster-0.2b.xqy"
+  mode "0755"
+  owner "root"
+  group "root"
+end
