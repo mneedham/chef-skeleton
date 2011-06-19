@@ -24,3 +24,7 @@ package "MarkLogic" do
   provider Chef::Provider::Package::Rpm
 end
 
+execute "/etc/init.d/MarkLogic start" do
+  action :run
+  creates "/var/run/MarkLogic.pid"
+end
