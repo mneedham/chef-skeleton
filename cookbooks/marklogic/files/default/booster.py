@@ -26,7 +26,7 @@ def agree_go(server_name):
 def security_install_go(server_name):
     http(server_name, "security-install-go.xqy", { 'auto':'true', 'user':'admin', 'password1':'admin', 'password2':'admin', 'realm':'public' })
 
-def testing_admin_connection(server_name):
+def test_admin_connection(server_name):
     http(server-name, "default.xqy")
 
 def http(server_name, xquery_file, args = ""):

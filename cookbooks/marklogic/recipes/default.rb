@@ -56,7 +56,7 @@ server_name = "http://localhost:8001"
 booster.configureAuthHttpProcess(server_name, "admin", "admin")
 booster.license(server_name)
 booster.agree_go(server_name)
-booster.initialize_go(server_name)
+#booster.initialize_go(server_name)
   EOH
 end
 
