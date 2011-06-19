@@ -44,20 +44,21 @@ cookbook_file "/usr/local/bin/booster.py" do
 end
 
 script "configure mark logic" do
-  interpretor "python"
+  interpreter "python"
   user "root"
   cwd "/tmp"
+  environment ({"PYTHONPATH" => '/usr/local/bin'})
 
   code <<-EOH
-    import os
-    import sys
-    import subprocess
-    import shlex
-    import time
-    import urllib
-    import urllib2
-    import booster
+import os
+import sys
+import subprocess
+import shlex
+import time
+import urllib
+import urllib2
+import booster
 
-    booster.configureAuthHttpProcess(http://localhost:8001, "admin", "admin")
+booster.configureAuthHttpProcess("http://localhost:8001", "admin", "admin")
   EOH
 end
