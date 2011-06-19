@@ -1,3 +1,8 @@
 To get chef setup on a Fedora box you can run the following command:
 
 sudo bash < <(curl -s -L https://raw.github.com/mneedham/chef-skeleton/master/setup.sh)
+
+Then need to copy the files in etc_chef into /etc/chef 
+And then run sudo chef-solo from a directory which has the cookbooks/roles in
+
+Need to authomate this last bit
