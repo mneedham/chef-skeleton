@@ -1,16 +1,12 @@
-#
 # Cookbook Name:: marklogic
 # Recipe:: default
-#
-# Copyright 2011, YOUR_COMPANY_NAME
-#
-# All rights reserved - Do Not Redistribute
-#
 
 yum_package "glibc" do
    arch "i686"
 end
 package "redhat-lsb"
+package "sysstat"
+package "psutils"
 
 remote_file "/tmp/marklogic.rpm" do
   source "http://developer.marklogic.com/download/binaries/4.2/MarkLogic-4.2-4.x86_64.rpm"
