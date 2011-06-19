@@ -50,15 +50,32 @@ script "configure mark logic" do
   environment ({"PYTHONPATH" => '/usr/local/bin'})
 
   code <<-EOH
-import os
-import sys
-import subprocess
-import shlex
-import time
-import urllib
-import urllib2
 import booster
 
-booster.configureAuthHttpProcess("http://localhost:8001", "admin", "admin")
+server_name = "http://localhost:8001"
+booster.configureAuthHttpProcess(server_name, "admin", "admin")
+booster.license(server_name)
+booster.agree_go(server_name)
+booster.initialize_go(server_name)
+  EOH
+end
+
+execute "/etc/init.d/MarkLogic restart" do
+  action :run
+end
+
+script "configure mark logic" do
+  interpreter "python"
+  user "root"
+  cwd "/tmp"
+  environment ({"PYTHONPATH" => '/usr/local/bin'})
+
+  code <<-EOH
+import booster
+
+server_name = "http://localhost:8001"
+booster.configureAuthHttpProcess(server_name, "admin", "admin")
+booster.security_install_go(server_name)
+booster.test_admin_connection(server_name)
   EOH
 end
