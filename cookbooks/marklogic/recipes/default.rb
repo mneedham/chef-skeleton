@@ -35,3 +35,29 @@ cookbook_file "/opt/MarkLogic/Admin/booster.xqy" do
   owner "root"
   group "root"
 end
+
+cookbook_file "/usr/local/bin/booster.py" do
+  source "booster.py"
+  mode "0755"
+  owner "root"
+  group "root"
+end
+
+script "configure mark logic" do
+  interpretor "python"
+  user "root"
+  cwd "/tmp"
+
+  code <<-EOH
+    import os
+    import sys
+    import subprocess
+    import shlex
+    import time
+    import urllib
+    import urllib2
+    import booster
+
+    booster.configureAuthHttpProcess(http://localhost:8001, "admin", "admin")
+  EOH
+end
