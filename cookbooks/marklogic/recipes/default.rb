@@ -73,3 +73,17 @@ booster.security_install_go(server_name)
 booster.test_admin_connection(server_name)
   EOH
 end
+
+python "setup app server" do
+  user "root"
+  cwd "/tmp"
+  environment ({"PYTHONPATH" => '/usr/local/bin'})
+  code <<-EOH
+import booster
+
+booster.booster(server_name, { "action":"appserver-create-http", "group-name":"Default", "root": "/home/casper/casper/core/src/main/xquery",                               
+			       "database-name": 'Documents', "modules-name": 'file-system', "appserver-name": 'http-9997', "port": '9997'  })
+booster.booster(server_name, { "action":"appserver-set", "appserver-name": 'http-9997', "group-name": "Default",  "setting": "authentication", "value": "application-level"})
+booster.booster(server_name, { "action":"appserver-set", "appserver-name": 'http-9997', "group-name": "Default",  "setting": "default-user", "value": "admin"})
+  EOH
+end
