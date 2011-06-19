@@ -24,10 +24,10 @@ def agree_go(server_name):
     http(server_name, "agree-go.xqy", { 'accepted-agreement':"evaluation" })
 
 def security_install_go(server_name):
-    http(server_name, "security-install-go.xqy", { 'auto':'true', 'user':'admin', 'password1':'admin', 'password2':'admin', 'realm':'public' })
+    http(server_name, "security-install.xqy", { 'auto':'true', 'user':'admin', 'password1':'admin', 'password2':'admin', 'realm':'public' })
 
 def test_admin_connection(server_name):
-    http(server-name, "default.xqy")
+    http(server_name, "default.xqy")
 
 def http(server_name, xquery_file, args = ""):
     request = urllib2.Request(server_name + "/" + xquery_file)

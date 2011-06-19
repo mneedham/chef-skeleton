@@ -43,8 +43,7 @@ cookbook_file "/usr/local/bin/booster.py" do
   group "root"
 end
 
-script "configure mark logic" do
-  interpreter "python"
+python "configure mark logic" do
   user "root"
   cwd "/tmp"
   environment ({"PYTHONPATH" => '/usr/local/bin'})
@@ -64,8 +63,7 @@ execute "/etc/init.d/MarkLogic restart" do
   action :run
 end
 
-script "configure mark logic" do
-  interpreter "python"
+python "configure mark logic" do
   user "root"
   cwd "/tmp"
   environment ({"PYTHONPATH" => '/usr/local/bin'})
