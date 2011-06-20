@@ -42,13 +42,12 @@ end
 python "configure mark logic" do
   user "root"
   cwd "/tmp"
-  environment ({"PYTHONPATH" => '/usr/local/bin', "server_name" => node[:mark_logic][:server_name]})
+  environment ({"PYTHONPATH" => '/usr/local/bin'})
 
   code <<-EOH
 import booster
-import os
 
-server_name = os.getenv("server_name")
+server_name = "#{node[:mark_logic][:server_name]}"
 
 booster.configureAuthHttpProcess(server_name, "admin", "admin")
 booster.license(server_name)
@@ -64,13 +63,12 @@ end
 python "configure mark logic" do
   user "root"
   cwd "/tmp"
-  environment ({"PYTHONPATH" => '/usr/local/bin', "server_name" => node[:mark_logic][:server_name]})
+  environment ({"PYTHONPATH" => '/usr/local/bin'})
 
   code <<-EOH
 import booster
-import os
 
-server_name = os.getenv("server_name")
+server_name = "#{node[:mark_logic][:server_name]}"
 
 booster.configureAuthHttpProcess(server_name, "admin", "admin")
 booster.security_install_go(server_name)
@@ -81,15 +79,14 @@ end
 python "teardown existing app server" do
   user "root"
   cwd "/tmp"
-  environment ({"PYTHONPATH" => '/usr/local/bin', "server_name" => node[:mark_logic][:server_name]})
+  environment ({"PYTHONPATH" => '/usr/local/bin'})
   only_if "curl -s --digest -u'admin:adgemin' http://localhost:9997"
   code <<-EOH
 import booster
-import os
 
 print "Tearing down existing app server"
 
-server_name = os.getenv("server_name")
+server_name = "#{node[:mark_logic][:server_name]}"
 
 booster.configureAuthHttpProcess(server_name, "admin", "admin")
 booster.booster(server_name, { "action":"appserver-delete", "appserver-name": 'http-9997', "group-name": "Default"})
